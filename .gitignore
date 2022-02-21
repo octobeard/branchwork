@@ -4,6 +4,9 @@ build/
 
 render/*.png
 render/*.pdf
+render/*.mp4
+render/*.mkv
+render/*.blender
 
 .DS_Store
 
