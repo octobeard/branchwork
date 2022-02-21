@@ -1,42 +1,42 @@
 import hype.*
+import hype.extended.colorist.HColorPool
 import hype.extended.layout.HShapeLayout
 import processing.core.PApplet
 import processing.core.PGraphics
-import java.awt.Color
 
 
-class Branchwork1 : PApplet() {
+class Branchwork2 : PApplet() {
+    private lateinit var colors: HColorPool
     private val imageFileName = "branchwork-render.png"
     private val vectorFileName = "cyrcle3-vrender.pdf"
-    private val saveImg = false
+    private val saveImg = true
     private val saveVct = false
     private val scaleFactor = 4
 
     override fun settings() {
-        size(800,800)
+        size(1920,1080)
         smooth()
         noLoop()
     }
     override fun setup() {
         H.init(this)
-        H.background(0xFFFFFF.rgb())
-        drawBranches("branch-layout-1.png", 20, 25, 250, false);
-        drawBranches("branch-layout-1.png", 100, 15, 250, false);
-        //drawBranches("branch-layout-2.png", 200, 40, 250, false);
-        drawBranches("branch-layout-3.png", 800, 15, 100, false);
-        drawBranches("branch-layout-3.png", 1000, 5, 175, false);
-        drawBranches(null, 10000, 2, 80, false);
-        drawBranches("branch-layout-3.png", 1000, 50, 150, true);
-        val r = HRect(10f, height.toFloat())
-        r.fill(0x000000.rgb()).noStroke().loc(width.toFloat()/2f, 500f)
-        H.add(r)
+        H.background(0x220202.rgb())
+        colors = HColorPool(0xF01010.rgb(), 0xE7E7E7.rgb(), 0xB01010.rgb())
+
+        drawBranches(null, 200, 80, 100, false)
+        drawBranches(null, 1000, 45, 120, false)
+        //drawBranches("branch-layout-2.png", 200, 40, 250, false)
+        drawBranches(null, 1000, 25, 200, false)
+        drawBranches(null, 10000, 5, 175, false)
+        drawBranches(null, 10000, 2, 225, false)
+        drawBranches(null, 5000, 10, 150, false)
 
         if (saveVct) {
-            saveVector();
+            saveVector()
         }
 
         if (saveImg) {
-            saveHiRes(scaleFactor);
+            saveHiRes(scaleFactor)
         }
     }
 
@@ -52,12 +52,11 @@ class Branchwork1 : PApplet() {
                     .strokeJoin(ROUND)
                     .strokeCap(ROUND)
                     .strokeWeight(random(1f, 5f))
-                    .stroke(0x000000.rgb())
+                    .stroke(colors.color)
                     .rotate(random(360f))
                     .anchorAt(H.CENTER)
                     .size(size + random(0f, 50f))
                     .alpha(alpha)
-
 
                 if (fill) {
                     d.fill(0x000000.rgb())
@@ -99,4 +98,5 @@ class Branchwork1 : PApplet() {
         hires.save("render/$imageFileName")
     }
 }
+
 
